@@ -1,3 +1,7 @@
+File format for some files in the workspace
+
+filename: category_1  category_2  ...
+
 Gazes:  frame_id        x       y       time  
 
 GPS_DB: lower_left_x    lower_left_y    lower_right_x   lower_right_y   upper_right_x   upper_right_y   upper_left_x    upper_left_y
