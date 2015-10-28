@@ -1,12 +1,28 @@
+The program works on Ubunutu 14.04, 15.04 and 15.10 with gcc 4.8 and later version (tested with gcc 5.2).
+
+In the workspace, there should be four other folders, namely, dataset, query, dataset_sim and query_sim, containing database images, query images, descriptors for database images and descriptors for query images, respectively. Due to the limitation of the uploaded file size, they are not uploaded to github.
+
+To install the dependencies,
+make sure the programs are installed either in subfolders of usr/ or subfolders of /usr/local
+
 1. install cuda
+On the laptop the program was developed, cuda 6.5 together with nVidia driver 340 was used.
+for computers without cuda, you should go to src/imret/imretFuncs.hpp and change in function simprep_gpu 
+from char * argv[] = {"-fo", "-1","-v", "0","-b", "1","-cuda"} 
+to char * argv[] = {"-fo", "-1","-v", "0","-b", "1"}; 
+
 2. install openmvg
 sudo mkdir /usr/local/include/openMVG_dependencies/nonFree/sift
 sudo cp -r vl sift
 sudo cp SIFT_describer.hpp sift
+
 3. install flann
+
 4. install qt5
+
 5. install libconfig++
 sudo apt-get install libconfig++-dev
+
 6. sudo cp imretOpenMVG/src/thirdparty/SiftGPU/bin/libsiftgpu.so /usr/lib
 
 
