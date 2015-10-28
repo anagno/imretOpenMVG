@@ -1669,6 +1669,8 @@ int compute1(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
     int ii = 0;
     for(ii = 0; ii < img_to_proc.size(); ++ ii){
         
+        const clock_t begin_time = std::clock();
+
         std::vector<std::string> current_frame;
         current_frame.push_back(img_to_proc[ii]);
         onlineParts.simprep_gpu(current_frame);
@@ -1903,11 +1905,6 @@ int compute1(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                 
                 
                 
-                // std::cout << "qr " << qr_sift_list[i] << std::endl;
-                // std::cout <<"db " << siftFiles[qr_simil_ind_sorted[0]] <<" " <<siftFiles[qr_simil_ind_sorted[1]] <<" "<<siftFiles[qr_simil_ind_sorted[2]]<< std::endl;
-                // std::cout << "recommended " << siftFiles[matchedImgId] << std::endl;
-                // std::cout << std::endl;
-                
                 
                 //////////////////////////////////USAC/////////////////////////////////////////
                 // HomogEstimator* homog = new HomogEstimator;
@@ -1944,8 +1941,7 @@ int compute1(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             std::vector<double> matched_result_element(4,0);
             matched_result_element[0] = gazes[ii][0];
             matched_result_element[2] = matchedImgId;
-            
-            std::cout << "best_matched_img "<< siftFiles[matchedImgId] << std::endl;
+
             for(j = 0; j < gps_assgn.size(); ++j ){
                 if ((double)matchedImgId == gps_assgn[j][1]){
                     //project frame to gaze with homography
@@ -1975,10 +1971,7 @@ int compute1(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                     transformed_label_x.insert(transformed_label_x.end(),transformed_label_y.begin(), transformed_label_y.end());
                     transformed_labels.push_back(transformed_label_x);
                     
-                    std::cout << "bounding box:" << std::endl;
-                    std::cout << verts << std::endl;
-                    std::cout << "gaze:" << std::endl;
-                    std::cout << testx << " " << testy << std::endl;
+
                     
                     if( pnpoly(4, vertx, verty,  testx,testy) ){
                         matched_result_element[1] = gps_assgn[j][0];
@@ -2001,11 +1994,10 @@ int compute1(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             // }
             
             qr_index.reset();
-            std::cout << "frame "<<qr_sift_list[i]<<" feature " << matched_result_element[1] <<" DB image "<< siftFiles[matched_result_element[2]]  << std::endl;
-            
+
         } //to loop through the similarity matrix row by row, in this case, there is only one row because there is only one frame
         
-        
+        std::cout << float(std::clock() - begin_time) / CLOCKS_PER_SEC;
         
         
         
@@ -2182,21 +2174,13 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             //////////////////////////algorithm 2: use former matched image ///////////////////////////////////////
             /////////////////////////always try algorithm 2 before 3 and abandon it when nothing is matched////////
             std::cout << "algorithm 2 is used" << std::endl;
-            
 
-
-
-             std::cout << "place 1" << std::endl;
-
-
-
-            
+            const clock_t begin_time = std::clock();
             MatrixXfr qr_descs_mat;
             flann::Matrix<Scalar> qr_descs_mat_flann;
             onlineParts.load_descs(qr_sim_path+qr_sift_list[0],qr_descs_mat);
             onlineParts.convert2flann(qr_descs_mat, qr_descs_mat_flann);
             
-            std::cout << "place 2" << std::endl;
 
 
             std::unique_ptr< flann::Index<Metric> > qr_index;
@@ -2206,7 +2190,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             int suggested_img_id =(int) matched_results[ii-1][2];
 
 
-            std::cout << "place 3" << std::endl;
+
             openMVG::image::Image<unsigned char> testImage;
             img_list = stlplus::folder_wildcard(env.img_path, "*.png", false, true);
             std::sort(img_list.begin(), img_list.end(), compareNat);
@@ -2214,7 +2198,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             openMVG::image::ReadImage( imagePath.c_str(), &testImage);
 
 
-            std::cout << "place 4" << std::endl;
+
 
 
             MatrixXfr descs_mat;
@@ -2228,7 +2212,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             qr_index->knnSearch(descs_mat_flann, *indices, *dists, 2, flann::SearchParams(256));
             
 
-            std::cout << "place 5" << std::endl;
+
 
             Eigen::Map<Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> indices_mat(indices->ptr(), indices->rows,indices->cols);
             
@@ -2268,8 +2252,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                     sel.push_back(k);
                 }
             }
-            
-            std::cout << "place 6" << std::endl;
+
 
             MatrixXfr qr_feats_mat,feats_mat, tc(sel.size(),4), tc_qr(sel.size(),4);
             offlineParts.load_feats(sim_path + siftFiles[suggested_img_id],feats_mat);
@@ -2298,7 +2281,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                 tc_qr.resize (m-1,4);
             }
             
-            std::cout << "place 7" << std::endl;
+
             ////////////////////ACRANSAC/////////////////////////////
             
             std::vector<size_t> vec_inliers;
@@ -2374,7 +2357,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             
             
             
-            std::cout << "place 8" << std::endl;
+
 
             
             /////////////gaze matching//////////////
@@ -2382,8 +2365,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             std::vector<double> matched_result_element(4,0);
             matched_result_element[0] = gazes[ii][0];
             matched_result_element[2] = suggested_img_id;
-            
-            std::cout << "best_matched_img "<< siftFiles[suggested_img_id] << std::endl;
+
             for(j = 0; j < gps_assgn.size(); ++j ){
                 if ((double)suggested_img_id == gps_assgn[j][1]){
                     //project frame to gaze with homography
@@ -2425,6 +2407,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             
             matched_results.push_back(matched_result_element);
             
+            std::cout << float(std::clock() - begin_time) / CLOCKS_PER_SEC;
             qr_index.reset();
         }
         
@@ -2432,6 +2415,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             //////////////////////////algorithm 3: query the database///////////////////////////////
             std::cout << "algorithm 3 is used" << std::endl;
             
+            const clock_t begin_time = std::clock();
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //                qr_sift_list = stlplus::folder_wildcard (qr_env.sim_path, "*.sift", false, true);
@@ -2704,7 +2688,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                 matched_result_element[0] = gazes[ii][0];
                 matched_result_element[2] = matchedImgId;
                 
-                std::cout << "best_matched_img "<< siftFiles[matchedImgId] << std::endl;
+
                 for(j = 0; j < gps_assgn.size(); ++j ){
                     if ((double)matchedImgId == gps_assgn[j][1]){
                         //project frame to gaze with homography
@@ -2734,10 +2718,7 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                         transformed_label_x.insert(transformed_label_x.end(),transformed_label_y.begin(), transformed_label_y.end());
                         transformed_labels.push_back(transformed_label_x);
                         
-                        std::cout << "bounding box:" << std::endl;
-                        std::cout << verts << std::endl;
-                        std::cout << "gaze:" << std::endl;
-                        std::cout << testx << " " << testy << std::endl;
+
                         
                         if( pnpoly(4, vertx, verty,  testx,testy) ){
                             matched_result_element[1] = gps_assgn[j][0];
@@ -2760,19 +2741,19 @@ int compute2(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                 // }
                 
                 qr_index.reset();
-                std::cout << "frame "<<qr_sift_list[i]<<" feature " << matched_result_element[1] <<" DB image "<< siftFiles[matched_result_element[2]]  << std::endl;
+
                 
             } //to loop through the similarity matrix row by row, in this case, there is only one row because there is only one frame
             
             
+            std::cout << float(std::clock() - begin_time) / CLOCKS_PER_SEC;
             
-            
-          }//algorithm 3
-            
-            //delete ftrs_to_sim file
-            std::string ftrs_to_sim_path = qr_sim_path + "ftrs_to_sim";
-            stlplus::file_delete (ftrs_to_sim_path);
-            
+        }//algorithm 3
+
+        //delete ftrs_to_sim file
+        std::string ftrs_to_sim_path = qr_sim_path + "ftrs_to_sim";
+        stlplus::file_delete (ftrs_to_sim_path);
+
 
     }// to feature-matching one frame by another
     
@@ -2968,7 +2949,7 @@ int compute3(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             std::cout << "algorithm 2 is used" << std::endl;
             
 
-            
+            const clock_t begin_time = std::clock();
             MatrixXfr qr_descs_mat;
             flann::Matrix<Scalar> qr_descs_mat_flann;
             onlineParts.load_descs(qr_sim_path+qr_sift_list[0],qr_descs_mat);
@@ -3145,7 +3126,7 @@ int compute3(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             matched_result_element[0] = gazes[ii][0];
             matched_result_element[2] = suggested_img_id;
             
-            std::cout << "best_matched_img "<< siftFiles[suggested_img_id] << std::endl;
+
             for(j = 0; j < gps_assgn.size(); ++j ){
                 if ((double)suggested_img_id == gps_assgn[j][1]){
                     //project frame to gaze with homography
@@ -3187,6 +3168,7 @@ int compute3(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             
             matched_results.push_back(matched_result_element);
             
+            std::cout << float(std::clock() - begin_time) / CLOCKS_PER_SEC;
             qr_index.reset();
         }
         
@@ -3195,7 +3177,7 @@ int compute3(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
             std::cout << "algorithm 3 is used" << std::endl;
             
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            const clock_t begin_time = std::clock();
             //                qr_sift_list = stlplus::folder_wildcard (qr_env.sim_path, "*.sift", false, true);
             //qr_sift_list = stlplus::folder_wildcard (qr_env.sim_path, sift_file_name, false, true);
             //std::sort(qr_sift_list.begin(), qr_sift_list.end(), compareNat);
@@ -3466,7 +3448,7 @@ int compute3(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                 matched_result_element[0] = gazes[ii][0];
                 matched_result_element[2] = matchedImgId;
                 
-                std::cout << "best_matched_img "<< siftFiles[matchedImgId] << std::endl;
+
                 for(j = 0; j < gps_assgn.size(); ++j ){
                     if ((double)matchedImgId == gps_assgn[j][1]){
                         //project frame to gaze with homography
@@ -3522,19 +3504,19 @@ int compute3(const imretDataTypes::opt& pOpt, std::vector<std::string>& paths, i
                 // }
                 
                 qr_index.reset();
-                std::cout << "frame "<<qr_sift_list[i]<<" feature " << matched_result_element[1] <<" DB image "<< siftFiles[matched_result_element[2]]  << std::endl;
+
                 
             } //to loop through the similarity matrix row by row, in this case, there is only one row because there is only one frame
             
             
             
-            
+            std::cout << float(std::clock() - begin_time) / CLOCKS_PER_SEC;
             
         }//algorithm 3
-            //delete ftrs_to_sim file
-            std::string ftrs_to_sim_path = qr_sim_path + "ftrs_to_sim";
-            stlplus::file_delete (ftrs_to_sim_path);
-            
+        //delete ftrs_to_sim file
+        std::string ftrs_to_sim_path = qr_sim_path + "ftrs_to_sim";
+        stlplus::file_delete (ftrs_to_sim_path);
+
 
     }// to feature-matching one frame by another
     
