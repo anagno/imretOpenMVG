@@ -14,7 +14,8 @@ To use siftgpu,
 sudo cp imretOpenMVG/src/thirdparty/SiftGPU/bin/libsiftgpu.so /usr/lib
 
 2. install openmvg (https://github.com/openMVG/openMVG.git)
-After installed on the local machine, there is a bug that makes the nonFree library cannot be included correctly. To fix it:
+openMVG itself includes most of the dependencies such as eigen and stlplus3.
+After openMVG being installed on the local machine, there is a bug that makes the nonFree library cannot be included correctly. To fix it:
 sudo mkdir /usr/local/include/openMVG_dependencies/nonFree/sift
 sudo cp -r vl sift
 sudo cp SIFT_describer.hpp sift
