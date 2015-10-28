@@ -43,5 +43,5 @@ An example to run it could be:
 cd build
 ./main
 
-Then a window form is poped up. 
+Then a window form pops up. 
 
