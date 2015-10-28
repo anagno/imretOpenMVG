@@ -9,7 +9,7 @@ make sure the programs are installed either in subfolders of usr/ or subfolders 
 cuda 6.5 together with nVidia driver 340 has been tested.
 For computers without cuda, you should go to src/imret/imretFuncs.hpp and change in function simprep_gpu 
 from char * argv[] = {"-fo", "-1","-v", "0","-b", "1","-cuda"} 
-to char * argv[] = {"-fo", "-1","-v", "0","-b", "1"}; 
+to char * argv[] = {"-fo", "-1","-v", "0","-b", "1"}
 To use siftgpu, 
 sudo cp imretOpenMVG/src/thirdparty/SiftGPU/bin/libsiftgpu.so /usr/lib
 
