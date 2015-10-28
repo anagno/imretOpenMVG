@@ -1,6 +1,6 @@
 The program works on Ubunutu 14.04, 15.04 and 15.10 with gcc 4.8 and later version (tested with gcc 5.2).
 
-In the workspace, there should be four other folders, namely, dataset, query, dataset_sim and query_sim, containing database images, query images, descriptors for database images and descriptors for query images, respectively. Due to the limitation of the uploaded file size, they are not uploaded to github.
+In the workspace, there should be four other folders, namely, dataset, query, dataset_sim and query_sim, containing database images, query images, descriptors for database images and descriptors for query images, respectively. Due to the limitation of the uploaded file size, they are not uploaded to github. It should be noticed that the folders with "_sim" should be left empty before runing the program because the sift files are expected to be generated after runing the program. It should always be fine to have generated sift files inside the dataset_sim folder for future usage which is the offline part of the program.
 
 To install the dependencies,
 make sure the programs are installed either in subfolders of usr/ or subfolders of /usr/local
