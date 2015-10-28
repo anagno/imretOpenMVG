@@ -36,5 +36,12 @@ cd build
 cmake . ../src
 make
 
-run the generated main funtion
+There might be several warnings during the compiling process which is fine.
+
+When running the program, one should use the generated "main" file in the build folder.
+An example to run it could be:
+cd build
+./main
+
+Then a window form is poped up. 
 
