@@ -26,6 +26,15 @@ sudo cp SIFT_describer.hpp sift
 5. install libconfig++
 sudo apt-get install libconfig++-dev
 
+6 install cmake
+sudo apt-get install cmake
 
+To compile,
+in imretOpenMVG,
+mkdir build
+cd build
+cmake . ../src
+make
 
+run the generated main funtion
 
