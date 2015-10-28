@@ -1,0 +1,14 @@
+Gazes:  frame_id        x       y       time  
+
+GPS_DB: lower_left_x    lower_left_y    lower_right_x   lower_right_y   upper_right_x   upper_right_y   upper_left_x    upper_left_y
+
+GPS_QR: location_id     latitude        longitude
+
+GPS_QR_processed: location_id           latitude        Longitude       suggested_building_id  
+
+GPS_QR_processed_assgn: building_id     image_id        bounding_lowerleft_x    bounding lowerleft_y    bounding_upperright_x   bounding_upperright_y   location_id
+
+labels: building_id     image_id        bounding_lowerleft_x    bounding lowerleft_y    bounding_upperright_x   bounding_upperright_y
+
+time: frame_idx         min             second
+

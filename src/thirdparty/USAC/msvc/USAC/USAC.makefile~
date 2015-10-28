@@ -1,0 +1,148 @@
+# Compiler flags...
+CPP_COMPILER = g++
+C_COMPILER = gcc
+
+# Include paths...
+Debug_Include_Path=-I"../../ext/libconfig-1.4.5/lib" 
+Release_Include_Path=-I"../../ext/libconfig-1.4.5/lib" 
+
+# Library paths...
+Debug_Library_Path=
+Release_Library_Path=
+
+# Additional libraries...
+Debug_Libraries=
+Release_Libraries=
+
+# Preprocessor definitions...
+Debug_Preprocessor_Definitions=-D GCC_BUILD -D _DEBUG -D _CONSOLE 
+Release_Preprocessor_Definitions=-D GCC_BUILD -D NDEBUG -D _CONSOLE -D _SECURE_SCL=0 
+
+# Implictly linked object files...
+Debug_Implicitly_Linked_Objects=
+Release_Implicitly_Linked_Objects=
+
+# Compiler flags...
+Debug_Compiler_Flags=-O0 
+Release_Compiler_Flags=-O2 
+
+# Builds all configurations for this project...
+.PHONY: build_all_configurations
+build_all_configurations: Debug Release 
+
+# Builds the Debug configuration...
+.PHONY: Debug
+Debug: create_folders gccDebug/../../../src/utils/FundmatrixFunctions.o gccDebug/../../src/utils/HomographyFunctions.o gccDebug/../../src/utils/MathFunctions.o gccDebug/../../src/config/ConfigFileReader.o gccDebug/../../src/config/ConfigParams.o gccDebug/../../src/config/ConfigParamsFundmatrix.o gccDebug/../../src/config/ConfigParamsHomog.o 
+	ar rcs gccDebug/libUSAC.a gccDebug/../../src/utils/FundmatrixFunctions.o gccDebug/../../src/utils/HomographyFunctions.o gccDebug/../../src/utils/MathFunctions.o gccDebug/../../src/config/ConfigFileReader.o gccDebug/../../src/config/ConfigParams.o gccDebug/../../src/config/ConfigParamsFundmatrix.o gccDebug/../../src/config/ConfigParamsHomog.o  $(Debug_Implicitly_Linked_Objects)
+
+# Compiles file ../../src/utils/FundmatrixFunctions.cpp for the Debug configuration...
+-include gccDebug/../../src/utils/FundmatrixFunctions.d
+gccDebug/../../src/utils/FundmatrixFunctions.o: ../../src/utils/FundmatrixFunctions.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/utils/FundmatrixFunctions.cpp $(Debug_Include_Path) -o gccDebug/../../src/utils/FundmatrixFunctions.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/utils/FundmatrixFunctions.cpp $(Debug_Include_Path) > gccDebug/../../src/utils/FundmatrixFunctions.d
+
+# Compiles file ../../src/utils/HomographyFunctions.cpp for the Debug configuration...
+-include gccDebug/../../src/utils/HomographyFunctions.d
+gccDebug/../../src/utils/HomographyFunctions.o: ../../src/utils/HomographyFunctions.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/utils/HomographyFunctions.cpp $(Debug_Include_Path) -o gccDebug/../../src/utils/HomographyFunctions.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/utils/HomographyFunctions.cpp $(Debug_Include_Path) > gccDebug/../../src/utils/HomographyFunctions.d
+
+# Compiles file ../../src/utils/MathFunctions.cpp for the Debug configuration...
+-include gccDebug/../../src/utils/MathFunctions.d
+gccDebug/../../src/utils/MathFunctions.o: ../../src/utils/MathFunctions.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/utils/MathFunctions.cpp $(Debug_Include_Path) -o gccDebug/../../src/utils/MathFunctions.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/utils/MathFunctions.cpp $(Debug_Include_Path) > gccDebug/../../src/utils/MathFunctions.d
+
+# Compiles file ../../src/config/ConfigFileReader.cpp for the Debug configuration...
+-include gccDebug/../../src/config/ConfigFileReader.d
+gccDebug/../../src/config/ConfigFileReader.o: ../../src/config/ConfigFileReader.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/config/ConfigFileReader.cpp $(Debug_Include_Path) -o gccDebug/../../src/config/ConfigFileReader.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/config/ConfigFileReader.cpp $(Debug_Include_Path) > gccDebug/../../src/config/ConfigFileReader.d
+
+# Compiles file ../../src/config/ConfigParams.cpp for the Debug configuration...
+-include gccDebug/../../src/config/ConfigParams.d
+gccDebug/../../src/config/ConfigParams.o: ../../src/config/ConfigParams.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/config/ConfigParams.cpp $(Debug_Include_Path) -o gccDebug/../../src/config/ConfigParams.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/config/ConfigParams.cpp $(Debug_Include_Path) > gccDebug/../../src/config/ConfigParams.d
+
+# Compiles file ../../src/config/ConfigParamsFundmatrix.cpp for the Debug configuration...
+-include gccDebug/../../src/config/ConfigParamsFundmatrix.d
+gccDebug/../../src/config/ConfigParamsFundmatrix.o: ../../src/config/ConfigParamsFundmatrix.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/config/ConfigParamsFundmatrix.cpp $(Debug_Include_Path) -o gccDebug/../../src/config/ConfigParamsFundmatrix.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/config/ConfigParamsFundmatrix.cpp $(Debug_Include_Path) > gccDebug/../../src/config/ConfigParamsFundmatrix.d
+
+# Compiles file ../../src/config/ConfigParamsHomog.cpp for the Debug configuration...
+-include gccDebug/../../src/config/ConfigParamsHomog.d
+gccDebug/../../src/config/ConfigParamsHomog.o: ../../src/config/ConfigParamsHomog.cpp
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -c ../../src/config/ConfigParamsHomog.cpp $(Debug_Include_Path) -o gccDebug/../../src/config/ConfigParamsHomog.o
+	$(CPP_COMPILER) $(Debug_Preprocessor_Definitions) $(Debug_Compiler_Flags) -MM ../../src/config/ConfigParamsHomog.cpp $(Debug_Include_Path) > gccDebug/../../src/config/ConfigParamsHomog.d
+
+# Builds the Release configuration...
+.PHONY: Release
+Release: create_folders gccRelease/../../src/utils/FundmatrixFunctions.o gccRelease/../../src/utils/HomographyFunctions.o gccRelease/../../src/utils/MathFunctions.o gccRelease/../../src/config/ConfigFileReader.o gccRelease/../../src/config/ConfigParams.o gccRelease/../../src/config/ConfigParamsFundmatrix.o gccRelease/../../src/config/ConfigParamsHomog.o 
+	ar rcs gccRelease/libUSAC.a gccRelease/../../src/utils/FundmatrixFunctions.o gccRelease/../../src/utils/HomographyFunctions.o gccRelease/../../src/utils/MathFunctions.o gccRelease/../../src/config/ConfigFileReader.o gccRelease/../../src/config/ConfigParams.o gccRelease/../../src/config/ConfigParamsFundmatrix.o gccRelease/../../src/config/ConfigParamsHomog.o  $(Release_Implicitly_Linked_Objects)
+
+# Compiles file ../../src/utils/FundmatrixFunctions.cpp for the Release configuration...
+-include gccRelease/../../src/utils/FundmatrixFunctions.d
+gccRelease/../../src/utils/FundmatrixFunctions.o: ../../src/utils/FundmatrixFunctions.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/utils/FundmatrixFunctions.cpp $(Release_Include_Path) -o gccRelease/../../src/utils/FundmatrixFunctions.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/utils/FundmatrixFunctions.cpp $(Release_Include_Path) > gccRelease/../../src/utils/FundmatrixFunctions.d
+
+# Compiles file ../../src/utils/HomographyFunctions.cpp for the Release configuration...
+-include gccRelease/../../src/utils/HomographyFunctions.d
+gccRelease/../../src/utils/HomographyFunctions.o: ../../src/utils/HomographyFunctions.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/utils/HomographyFunctions.cpp $(Release_Include_Path) -o gccRelease/../../src/utils/HomographyFunctions.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/utils/HomographyFunctions.cpp $(Release_Include_Path) > gccRelease/../../src/utils/HomographyFunctions.d
+
+# Compiles file ../../src/utils/MathFunctions.cpp for the Release configuration...
+-include gccRelease/../../src/utils/MathFunctions.d
+gccRelease/../../src/utils/MathFunctions.o: ../../src/utils/MathFunctions.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/utils/MathFunctions.cpp $(Release_Include_Path) -o gccRelease/../../src/utils/MathFunctions.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/utils/MathFunctions.cpp $(Release_Include_Path) > gccRelease/../../src/utils/MathFunctions.d
+
+# Compiles file ../../src/config/ConfigFileReader.cpp for the Release configuration...
+-include gccRelease/../../src/config/ConfigFileReader.d
+gccRelease/../../src/config/ConfigFileReader.o: ../../src/config/ConfigFileReader.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/config/ConfigFileReader.cpp $(Release_Include_Path) -o gccRelease/../../src/config/ConfigFileReader.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/config/ConfigFileReader.cpp $(Release_Include_Path) > gccRelease/../../src/config/ConfigFileReader.d
+
+# Compiles file ../../src/config/ConfigParams.cpp for the Release configuration...
+-include gccRelease/../../src/config/ConfigParams.d
+gccRelease/../../src/config/ConfigParams.o: ../../src/config/ConfigParams.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/config/ConfigParams.cpp $(Release_Include_Path) -o gccRelease/../../src/config/ConfigParams.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/config/ConfigParams.cpp $(Release_Include_Path) > gccRelease/../../src/config/ConfigParams.d
+
+# Compiles file ../../src/config/ConfigParamsFundmatrix.cpp for the Release configuration...
+-include gccRelease/../../src/config/ConfigParamsFundmatrix.d
+gccRelease/../../src/config/ConfigParamsFundmatrix.o: ../../src/config/ConfigParamsFundmatrix.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/config/ConfigParamsFundmatrix.cpp $(Release_Include_Path) -o gccRelease/../../src/config/ConfigParamsFundmatrix.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/config/ConfigParamsFundmatrix.cpp $(Release_Include_Path) > gccRelease/../../src/config/ConfigParamsFundmatrix.d
+
+# Compiles file ../../src/config/ConfigParamsHomog.cpp for the Release configuration...
+-include gccRelease/../../src/config/ConfigParamsHomog.d
+gccRelease/../../src/config/ConfigParamsHomog.o: ../../src/config/ConfigParamsHomog.cpp
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -c ../../src/config/ConfigParamsHomog.cpp $(Release_Include_Path) -o gccRelease/../../src/config/ConfigParamsHomog.o
+	$(CPP_COMPILER) $(Release_Preprocessor_Definitions) $(Release_Compiler_Flags) -MM ../../src/config/ConfigParamsHomog.cpp $(Release_Include_Path) > gccRelease/../../src/config/ConfigParamsHomog.d
+
+# Creates the intermediate and output folders for each configuration...
+.PHONY: create_folders
+create_folders:
+	mkdir -p gccDebug/source
+	mkdir -p gccRelease/source
+
+# Cleans intermediate and output files (objects, libraries, executables)...
+.PHONY: clean
+clean:
+	rm -f gccDebug/*.o
+	rm -f gccDebug/*.d
+	rm -f gccDebug/*.a
+	rm -f gccDebug/*.so
+	rm -f gccDebug/*.dll
+	rm -f gccDebug/*.exe
+	rm -f gccRelease/*.o
+	rm -f gccRelease/*.d
+	rm -f gccRelease/*.a
+	rm -f gccRelease/*.so
+	rm -f gccRelease/*.dll
+	rm -f gccRelease/*.exe
+
