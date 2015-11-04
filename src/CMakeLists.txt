@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.0.2)
 project(MasterThesis C CXX)
 
 IF(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
@@ -31,7 +31,7 @@ target_link_libraries (mainwindow imretFuncs)
 ADD_EXECUTABLE(main main.cpp)
 #target_link_libraries(main imretFuncs)
 target_link_libraries (main mainwindow)
-TARGET_LINK_LIBRARIES(main ${OPENMVG_LIBRARIES})
+TARGET_LINK_LIBRARIES(main ${OPENMVG_LIBRARIES} vlsift)
 
 
 
