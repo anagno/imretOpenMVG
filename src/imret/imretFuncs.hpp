@@ -47,7 +47,7 @@
 #include "dataType.hpp"
 #include "openMVG/matching/matcher_kdtree_flann.hpp"
 #include "openMVG/features/features.hpp"
-#include "openMVG_dependencies/nonFree/SIFT_describer.hpp"
+#include "openMVG_dependencies/nonFree/sift/SIFT_describer.hpp"
 #include "openMVG/image/image.hpp"
 #include "openMVG/numeric/numeric.h"
 #include "openMVG/multiview/solver_homography_kernel.hpp"
