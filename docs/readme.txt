@@ -46,3 +46,12 @@ cd build
 
 Then a window form pops up. 
 
+Possible issues for Ubuntu 14.04
+If you encounter the error "/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../lib/libsiftgpu.so: undefined reference to `std::__throw_out_of_range_fmt(char const*, ...)@GLIBCXX_3.4.20'" or something similar, you need to upgrade libstdc++.
+Following commands solve this problem:
+sudo apt-get install libstdc++6 (do this if libstdc++ was not installed)
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test 
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+
